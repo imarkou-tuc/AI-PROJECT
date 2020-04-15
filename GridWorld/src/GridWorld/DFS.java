@@ -5,27 +5,28 @@ import java.util.ArrayList;
 public class DFS {
 
     public Grid myGrid;
+    public int n;
 
-     boolean[] visited = new boolean[117];
-    private ArrayList<Integer>[] neighbours = new ArrayList[117];
+    boolean[] visited = new boolean[n];
+    int [] prev=new int[n];
     int cost = 0;
 
 
-    public DFS(Grid myGrid) {
+    public DFS(Grid myGrid,int n) {
         this.myGrid = myGrid;
+        this.n=n;
 
-
-        for (int i = 0; i < visited.length; i++) {
-            visited[i] = false;
+        for(int i = 0 ; i < n ; i++) {
+        visited=new boolean[i];
         }
 
-        for (int l = 0; l < 116; l++) {
-            neighbours[l] = new ArrayList<Integer>();
+        for(int j = 0 ; j < n ; j++) {
+            prev=new int[j];
         }
-
     }
 
-    public void dfs(int r, int c) {
+
+    public int[] dfs(int r, int c) {
 
         visited[r*myGrid.getNumOfColumns()+c]=true;
 
@@ -34,7 +35,7 @@ public class DFS {
             System.out.println("Solution found at :" + r + "<-Row Column->" + c);
             System.out.println("Total cost:" + cost);
 
-            return;
+            return prev;
         }
         int pick=1;
 
@@ -51,7 +52,7 @@ public class DFS {
                     }
                     break;
                 case 2://going down
-                    if(c+1<myGrid.getNumOfColumns()) {
+                    if(c+1<myGrid.getNumOfColumns()-1) {
                         if((!myGrid.getCell(r,c+1).isWall()) && !visited[r*myGrid.getNumOfColumns()+(c+1)]) {
                             dfs(r,c+1);
                             cost+=myGrid.getCell(r,c+1).getCost();
@@ -67,7 +68,7 @@ public class DFS {
                     }
                     break;
                 case 4://going right
-                    if(r+1<myGrid.getNumOfRows()) {
+                    if(r+1<myGrid.getNumOfRows()-1) {
                         if((!myGrid.getCell(r+1,c).isWall()) && !visited[(r+1)*myGrid.getNumOfColumns()+c]) {
                             dfs(r+1,c);
                             cost+=myGrid.getCell(r+1,c).getCost();
@@ -78,8 +79,8 @@ public class DFS {
                     break;
             }
         }
-
-
+        return prev;
     }
+
 
 }

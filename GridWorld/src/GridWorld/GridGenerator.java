@@ -36,6 +36,8 @@ class GridGenerator{
 	public static void main(String[] args) {
 		String frame = "Random World";
 		Grid mygrid;
+		int[] path=new int[300];
+
 
 		if (args.length<1)
 			mygrid = new Grid();
@@ -52,10 +54,10 @@ class GridGenerator{
 		int M = mygrid.getNumOfColumns();
 		VisualizeGrid(frame,N,M,mygrid.getWalls(),mygrid.getGrass(),mygrid.getStartidx(),mygrid.getTerminalidx());
 
-		DFS dfs=new DFS(mygrid);
+		DFS dfs=new DFS(mygrid,M*N);
 		System.out.println(mygrid.getStartidx()/mygrid.getNumOfColumns());
 		System.out.println(mygrid.getStartidx()%mygrid.getNumOfColumns());
-		dfs.dfs(mygrid.getStartidx()/mygrid.getNumOfColumns(),mygrid.getStartidx()%mygrid.getNumOfColumns());
+		path=dfs.dfs(mygrid.getStartidx()/mygrid.getNumOfColumns(),mygrid.getStartidx()%mygrid.getNumOfColumns());
 	}
 
 		

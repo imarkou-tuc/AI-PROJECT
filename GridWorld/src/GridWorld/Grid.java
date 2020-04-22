@@ -19,7 +19,7 @@ class Grid {
 
 	private int start_idx = 96;
 	private int terminal_idx = 42;
-	private int grass_cost = 2;
+	private int grass_cost = 10;
 
 	Grid(){
 		this.init();

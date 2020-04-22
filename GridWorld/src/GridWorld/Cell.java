@@ -10,6 +10,13 @@ package GridWorld;
 */
 class Cell {
 	private int cost=1;
+	private int heuristic=0;
+	private int gCost=0;
+	private int LRTAgCost=0;
+	private int LRTAfCost=0;
+	private int fCost=0;
+	private Cell Parent;
+	int position;
 
 	private boolean starting_point;
 	private boolean terminal_point;
@@ -51,8 +58,28 @@ class Cell {
 		this.cost = world_cost;
 	}
 
+	public int calculategCosts(Cell parent) {
+		return parent.getgCost()+this.getCost();
+	}
+
 	public char getCellType(){return this.cell_type;}
+	public int getHeuristic(){return this.heuristic;}
+	public int getfCost(){return heuristic+gCost;}
+	public int getgCost(){return this.gCost;}
+	public void setParent(Cell c1){ this.Parent=c1;}
+	public void setPosition(int pos) {this.position=pos;}
+	public int getLRTAgCost(){return this.getParent().getgCost() + 1;}
+	public int getLRTAfCost(){return this.heuristic+this.LRTAgCost;}
+
 	
 	public void setStartingPoint(boolean sp){this.starting_point=sp;}
 	public void setTerminalPoint(boolean sp){this.terminal_point=sp;}
+	public void setHeuristic(int h){this.heuristic=h;}
+	public void setfCost(){this.fCost=this.heuristic+this.gCost;}
+	public void setgCost(){this.gCost=this.getParent().getgCost()+this.getCost();}
+	public Cell getParent(){ return this.Parent;}
+	public int getPosition() {return this.position;}
+	public void setLRTAgCost(){this.LRTAgCost=getParent().getgCost()+1;}
+
+
 }

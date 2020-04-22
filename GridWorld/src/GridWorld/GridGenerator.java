@@ -36,7 +36,9 @@ class GridGenerator{
 	public static void main(String[] args) {
 		String frame = "Random World";
 		Grid mygrid;
-		int [] s={34 , 33 , 32 , 31 , 30 , 29 , 28 , 27 , 36 , 45 , 46 , 47 , 48 , 49 , 50 , 51 , 60 , 61 , 62 , 71 , 80 , 79 , 78 , 77 , 86 , 85 , 84 , 83 , 82 , 81 , 90 , 99 , 108};
+		Navigator n;
+		int[] s;
+
 
 
 		if (args.length<1)
@@ -52,6 +54,8 @@ class GridGenerator{
 		}
 		int N = mygrid.getNumOfRows();
 		int M = mygrid.getNumOfColumns();
+		n=new Navigator(mygrid);
+		s=n.FinalpathAstar();
 		VisualizeGrid(frame,N,M,mygrid.getWalls(),mygrid.getGrass(),s,mygrid.getStartidx(),mygrid.getTerminalidx());
 
 	}
